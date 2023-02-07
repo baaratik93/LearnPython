@@ -8,10 +8,9 @@ def GenerateCode (i,kb,nb):
     coded = ""
     if i == " ":
         coded += "00"
-    for k in range(0,len(kb)-1,1):
-        indice = k + 2
+    for indice,llet in kb.items():
         if i != " ":
-            if i in kb[indice]:
+            if i in llet:
                 index=kb[indice].index(i)
                 if index != (index+1):
                     coded+=((index+1) * str(indice))
