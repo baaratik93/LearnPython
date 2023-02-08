@@ -1,6 +1,7 @@
 from os import system
+from fn.donnees import Entete,CustomAppend,ShowSingleStudent,MenuGenerate,CustomSort
 def Menu(e):
-    MenuGenerate(["AFFICHER TOUT","TRIER  ","RECHERCHE","MODIFICATION","NOUVEAU","SORTIR"])
+    MenuGenerate(["\t AFFICHER TOUT","\t TRIER\t","\t RECHERCHE","\t MODIFICATION","\t NOUVEAU","\t SORTIR "])
     choice = input("\t\t\t\tEnter votre choix: ")
     if choice == "1":
         system("clear")
@@ -16,31 +17,13 @@ def Menu(e):
     elif choice == "5":
         ModifierEtudiant(SaisiEtudiant(e))
     elif choice =="6":
-        exit
-        
-def Entete():
-        print('+---------------------------------------------------------------------------------------------------------------------------------------+')
-        print('|\tPrénom\t|\tNom\t|\tTéléphone\t|\tClasses\t|\tDev\t|\tProj\t|\tExam\t|\tMoyenne\t|')
-        print('+---------------------------------------------------------------------------------------------------------------------------------------+')
-def CustomAppend(list,el):
-    el = [el]
-    list+=el
-    return list
+        exit    
 
 def afficherTout(etudiants):
     Entete()
     for etudiant in etudiants:
         ShowSingleStudent(etudiant)
-        
-def ShowSingleStudent(etudiant):
-        etudiant["moy"] = (etudiant["dev"] + etudiant["projet"] + etudiant["exam"])/3
-        print('|\t{}\t|\t{}\t|\t{}\t|\t{}\t|\t{}\t|\t{}\t|\t{}\t|\t{:.2f}\t|'
-                .format(etudiant["prenom"],etudiant["nom"],
-                etudiant["telephone"],etudiant["classe"],
-                etudiant["dev"],etudiant["projet"],
-                etudiant["exam"],etudiant["moy"]))
-        print('+---------------------------------------------------------------------------------------------------------------------------------------+')
-    
+            
     
 def TAMenu(e):
     system("clear")
@@ -49,12 +32,12 @@ def TAMenu(e):
     choice = input("\t\t\t\tEnter votre choix: ")
     if choice == "2":
         for i in range(len(e)):
-            newEtudiant = trier(e,"desc")
+            newEtudiant = CustomSort(e,"desc")
         afficherTout(newEtudiant)
         TAMenu(newEtudiant)
     elif choice == "1":
         for i in range(len(e)):
-            newEtudiant =trier(e,"asc")
+            newEtudiant =CustomSort(e,"asc")
         afficherTout(newEtudiant)
         TAMenu(newEtudiant)
     elif choice == "3":
@@ -62,30 +45,7 @@ def TAMenu(e):
         Menu(e)
     else:
         exit
-def trier(e,sens):
-    if sens=="asc":
-        for i in range(0,len(e)):
-            for j in range(i+1,len(e)):
-                if e[i]["moy"] > e[i+1]["moy"]:
-                    e[i],e[j]=e[j],e[i]
     
-        return e
-    else:
-        for i in range(0,len(e)):
-            for j in range(i+1,len(e)):
-                if e[i]["moy"] < e[i+1]["moy"]:
-                    e[i],e[j]=e[j],e[i]
-        
-        return e
-    
-    
-#---------------- Générateur de Menu -------------
-
-def MenuGenerate(list):
-    for i in range(len(list)):
-        print('\t\t\t\t+-----------------------+')
-        print('\t\t\t\t|    {} - {} \t+'.format(i+1,list[i]))
-        print('\t\t\t\t+-----------------------+')
         
 # ------------------ RECHERCHE-------------------
 
@@ -112,7 +72,7 @@ def RechercheEtudiant(e):
     if choix in ["1","2","3","4"]:
         Entete()
         ShowSingleStudent(etudiant)
-        afficherTout(e)
+        Menu(e)
 def RecherchePar(e,critere,valeur):
     system("clear")
     for i in e:
@@ -127,7 +87,7 @@ def Modifier(list,numero,critere,valeur):
             k[critere]=valeur
     return list
         
-# ------------------ RECHERCHE-------------------
+# ------------------ MODIFICATION -------------------
 
 def ModifierEtudiant(e):
     system("clear")
@@ -158,7 +118,7 @@ def ModifierEtudiant(e):
 def SaisiEtudiant(e):
     nom = input("\t\t\t\tEntrer le nom de l'étudiant: ")
     prenom = input("\t\t\t\tEntrer le prénom de l'étudiant: ")
-    telephone = input("\t\t\t\tEntrer le numéro de téléphone de l'étudiant: ")
+    telephone = int(input("\t\t\t\tEntrer le numéro de téléphone de l'étudiant: "))
     classe = input("\t\t\t\tEntrer la classe de l'étudiant: ")
     return CustomAppend(e,{
         "nom": nom,
