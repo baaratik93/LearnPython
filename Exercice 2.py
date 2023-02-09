@@ -20,10 +20,27 @@ inutiles de la phrase.
 #     else:
 #         phrase1 = phrase1 + phrase[i]
 # print(phrase1)
-
+def FirstAndLastSignifiantLetter(ch,position):
+    start = 0
+    stop =0
+    step = 0
+    s=""
+    t=False
+    if position == "f":
+        start = 0
+        stop = len(ch)
+        step = 1
+    elif position == "l":
+        start = len(ch)-1
+        stop = 0
+        step = -1
+    for i in range(start,stop,step):
+        if ch[i] != " ":
+                        t=True
+                        return i
 phrase = input("Entrer une phrase:")
 phrase1 = ""
-for i in range(0, len(phrase)):
+for i in range(FirstAndLastSignifiantLetter(phrase,"f"),FirstAndLastSignifiantLetter(phrase,"l")+1):
     if phrase[i] == " " and phrase[i + 1] == " ":
             continue
     else:
