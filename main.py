@@ -12,6 +12,7 @@
 # 6. Lorsque l’utilisateur quitte le programme, les données de la matrice
 # sont enregistrées dans un fichier texte.
 from fn.screen import ShowOperator
+from fn.screen import OperatorConstructTable
 clients = [
     {
         "prenom": "Penda",
@@ -35,14 +36,17 @@ clients = [
     }
 ]
 
-operators =[["776280898","782324455","779897656"],
-            ["706280898","709997865"],
-            ["756280898","754569988"],
-            ["766458877","769806657"]]
-
-ShowOperator("ORANGE:\t\t\t",operators[0])
-ShowOperator("EXPRESSO:\t\t",operators[1])
-ShowOperator("PROMOBILE:\t\t",operators[2])
+operators ={
+            "ORANGE":["776280898","782324455","779897656"],
+            "EXPRESSO":["706280898","709997865"],
+            "PROMOBILE":["756280898","754569988"],
+            "FREE":["766458877","769806657"]
+            }
+# ORANGE-PROMOBILE-FREE-EXPRESSO
+TabOp = OperatorConstructTable()
+ShowOperator("{}:\t\t\t".format(TabOp[0]),operators[TabOp[0]])
+ShowOperator("{}:\t\t\t".format(TabOp[2]),operators[TabOp[2]])
+ShowOperator("{}:\t\t".format(TabOp[3]),operators[TabOp[3]])
 
 
 # operator = input("Entrer une suite d'opérateurs téléphonique")
