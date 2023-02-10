@@ -75,18 +75,15 @@ def CustomAppend(list,el):
     return list
 
 def CustomSort(e,sens):
-    if sens=="asc":
-        for i in range(0,CustomLength(e)):
-            for j in range(i+1,CustomLength(e)):
+    for i in range(0,CustomLength(e)):
+        for j in range(i+1,CustomLength(e)):
+            if sens == "asc":
                 if e[i]["moy"] > e[i+1]["moy"]:
                     e[i],e[j]=e[j],e[i]
-        return e
-    else:
-        for i in range(0,CustomLength(e)):
-            for j in range(i+1,CustomLength(e)):
+            else:
                 if e[i]["moy"] < e[i+1]["moy"]:
                     e[i],e[j]=e[j],e[i]
-        return e
+    return e
 
 
 
