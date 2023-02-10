@@ -11,48 +11,61 @@
 # 5. Modifier ou ajouter un numero telephone pour un client
 # 6. Lorsque l’utilisateur quitte le programme, les données de la matrice
 # sont enregistrées dans un fichier texte.
-from fn.screen import ShowOperator
-from fn.screen import OperatorConstructTable
+from fn.screen import ShowOperator,OperatorConstructTable,SaisieDeClient,CustomAppend
+from os import system
 clients = [
     {
         "prenom": "Penda",
         "nom":  "DIA",
-        "telepone": "776280898"
+        "telephone": "776280898"
     },
     {
         "prenom": "Yaya",
         "nom":  "Wade",
-        "telepone": "766280898"
+        "telephone": "766280898"
     },
     {
         "prenom": "Amina",
         "nom":  "THIAM",
-        "telepone": "756280898"
+        "telephone": "756280898"
     },
     {
         "prenom": "Dooro",
         "nom":  "Dieng",
-        "telepone": "706280898"
+        "telephone": "706280898"
     }
 ]
 
 operators ={
-            "ORANGE":["776280898","782324455","779897656"],
-            "EXPRESSO":["706280898","709997865"],
+            "ORANGE":["776280898","782324455"],
+            "EXPRESSO":["706280898","709997865","709909988"],
             "PROMOBILE":["756280898","754569988"],
             "FREE":["766458877","769806657"]
             }
 # ORANGE-PROMOBILE-FREE-EXPRESSO
+#SAISIE DES OPERATEURS
 TabOp = OperatorConstructTable()
-ShowOperator("{}:\t\t\t".format(TabOp[0]),operators[TabOp[0]])
-ShowOperator("{}:\t\t\t".format(TabOp[2]),operators[TabOp[2]])
-ShowOperator("{}:\t\t".format(TabOp[3]),operators[TabOp[3]])
+
+# AFFICHAGE DES OPERATEURS
+for k in TabOp:
+    if k in ["EXPRESSO","PROMOBILE","ORANGE"]:
+        ShowOperator("\t\t {}:".format(k),operators[k])
+    else:
+        ShowOperator("\t\t {}:\t".format(k),operators[k])
+        
+# AJOUT D'UN ETUDIANT
+data = SaisieDeClient(clients)
+clients = data[0]
+CustomAppend(operators[data[2]],data[1])
+
+for k in TabOp:
+    if k in ["EXPRESSO","PROMOBILE","ORANGE"]:
+        ShowOperator("\t\t {}:".format(k),operators[k])
+    else:
+        ShowOperator("\t\t {}:\t".format(k),operators[k])
 
 
-# operator = input("Entrer une suite d'opérateurs téléphonique")
-#Ranger les contacts sur un dictionnaire de liste
-
-# for i in operators:
+    
     
     
     

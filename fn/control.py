@@ -72,5 +72,13 @@ def IsCorrect(ch):
             return False
     else:
         return False
+    
+def IsExistClient(list,number):
+    t = False
+    for k in list:
+        if k["telephone"]==number:
+            t = True
+            break
+    return t
 
 
