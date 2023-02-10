@@ -57,7 +57,7 @@ for k in TabOp:
 data = SaisieDeClient(clients)
 clients = data[0]
 CustomAppend(operators[data[2]],data[1])
-
+CustomAppend(TabOp,data[2])
 for k in TabOp:
     if k in ["EXPRESSO","PROMOBILE","ORANGE"]:
         ShowOperator("\t\t {}:".format(k),operators[k])
