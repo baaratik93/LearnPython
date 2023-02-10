@@ -169,4 +169,10 @@ def FileToStudent():
         })
     return lstd
 
-
+def IsStudent(list,number):
+    t = False
+    for k in list:
+        if k["telephone"]==number:
+            t = True
+            break
+    return t

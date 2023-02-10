@@ -1,6 +1,6 @@
 from os import system
 from os.path import exists
-from fn.donnees import Entete,CustomAppend,ShowSingleStudent,MenuGenerate,CustomSort,CustomLength,IsCorrect,StudentsToFile,FileToStudent
+from fn.donnees import Entete,CustomAppend,ShowSingleStudent,MenuGenerate,CustomSort,CustomLength,IsCorrect,StudentsToFile,FileToStudent,IsStudent
 def Menu(etudiants):
     if exists("students.txt"):
         e = FileToStudent()
@@ -18,12 +18,24 @@ def Menu(etudiants):
         system("clear")
         RechercheEtudiant(e)
     elif choice == "4":
+        system("clear")
         ModifierEtudiant(e)
     elif choice == "5":
-        ModifierEtudiant(SaisiEtudiant(e))
+        ControlInput(e)
     elif choice =="6":
         StudentsToFile(e)
         exit    
+        
+def ControlInput(e):
+    NewStudent = SaisiEtudiant(e)
+    if NewStudent:
+        rep=input("Voulez-vous ajouter un nouveau étudiant (o/n): ")
+        if rep == 'o' or rep == "O":
+            system("clear")
+            NewStudent = ControlInput(e)
+        else:
+            system("clear")
+            ModifierEtudiant(e)
 
 def afficherTout(etudiants):
     Entete()
@@ -97,30 +109,48 @@ def Modifier(list,numero,critere,valeur):
             continue
         else:
             k[critere]=valeur
+            
+    StudentsToFile(list)
     return list
         
 # ------------------ MODIFICATION -------------------
 
 def ModifierEtudiant(e):
-    system("clear")
     afficherTout(e)
     NewStudentList= []
     num = input("\t\t\t\tEntrer le numéro de téléphone de l'étudiant à modifier: ")
     num = IsCorrect(num)
     if not num:
+            system("clear")
+            print("Ce numéro n'est pas correct")
             ModifierEtudiant(e)
     else:
         MenuGenerate(["\t\tDev","\t\tProj","\t\tExam"])
         choix = input("Choisir la note à modifier: ")
         if choix == "1":
             note = float(input("\t\t\t\tEntrer la nouvelle note Dev: "))
-            NewStudentList = Modifier(e,num,"dev",note)
+            if note >=0 and note <=20:
+                NewStudentList = Modifier(e,num,"dev",note)
+            else:
+                system("clear")
+                print("Veuillez saisir une note comprise entre 0 et 20")
+                ModifierEtudiant(e)
         elif choix == "2":
             note = float(input("\t\t\t\tEntrer la nouvelle note Proj: "))
-            NewStudentList = Modifier(e,num,"projet",note)
+            if note >=0 and note <=20:
+                NewStudentList = Modifier(e,num,"projet",note)
+            else:
+                system("clear")
+                print("Veuillez saisir une note comprise entre 0 et 20")
+                ModifierEtudiant(e)
         elif choix == "3":
             note = float(input("\t\t\t\tEntrer la nouvelle note Exam: "))
-            NewStudentList = Modifier(e,num,"exam",note)
+            if note >=0 and note <=20:
+                NewStudentList = Modifier(e,num,"exam",note)
+            else:
+                system("clear")
+                print("Veuillez saisir une note comprise entre 0 et 20")
+                ModifierEtudiant(e)
         else:
             system("clear")
             print("Veuillez faire un choix correct.")
@@ -140,6 +170,10 @@ def SaisiEtudiant(e):
             system("clear")
             print("Veuillez saisir un numéro correct")
             SaisiEtudiant(e)
+    elif IsStudent(e,int(telephone)):
+        system("clear")
+        print("Ce numéro existe déja !!! Veuillez saisir un autre!")
+        SaisiEtudiant(e)
     classe = input("\t\t\t\tEntrer la classe de l'étudiant: ")
     return CustomAppend(e,{
         "nom": nom,
