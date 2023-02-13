@@ -31,9 +31,12 @@ def CoderPhrase(phrase):
             coded += GenerateCode(i,clavier,chiffres)
         elif i>="a" and i<= "z":
             coded += GenerateCode(i,keybord,numbers)
-        elif i >= '0' and i <='9' or i in ["'",'.',',',':','?','!','’',' ']:
+        elif i >= '0' and i <='9' or i in ["'",'.',',',':','?','!','’',' ','(',')','[',']','-']:
             coded += GenerateCode(i,keybord,numbers)
+        else:
+            print("Le caratère '{}' n'est pas autorisé.".format(i))
     return coded
 # - J’ai 17,5 en algo ⇔ 5’244400bh,f0033660025554666
 text ="J’ai 17,5 en algo"
-print(CoderPhrase(text))
+# print(CoderPhrase(text))
+print(CoderPhrase(input("Entrer une phrase: ")))
