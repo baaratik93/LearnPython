@@ -11,7 +11,7 @@
 # 5. Modifier ou ajouter un numero telephone pour un client
 # 6. Lorsque l’utilisateur quitte le programme, les données de la matrice
 # sont enregistrées dans un fichier texte.
-from fn.screen import ShowOperator,OperatorConstructTable,SaisieDeClient,CustomAppend
+from fn.screen import OperatorConstructTable,SaisieDeClient,CustomAppend,ListOperator,Menu
 from os import system
 clients = [
     {
@@ -42,27 +42,29 @@ operators ={
             "PROMOBILE":["756280898","754569988"],
             "FREE":["766458877","769806657"]
             }
-# ORANGE-PROMOBILE-FREE-EXPRESSO
 #SAISIE DES OPERATEURS
+# OperatorConstructTable() Donne la main pour saisir une liste d'opérateur et de stocker dans la variable TabOp
 TabOp = OperatorConstructTable()
 
 # AFFICHAGE DES OPERATEURS
-for k in TabOp:
-    if k in ["EXPRESSO","PROMOBILE","ORANGE"]:
-        ShowOperator("\t\t {}:".format(k),operators[k])
-    else:
-        ShowOperator("\t\t {}:\t".format(k),operators[k])
+ListOperator(TabOp,operators)
         
 # AJOUT D'UN ETUDIANT
+# Cette fonction reçoit la liste de clients existantes, ajoute un client puis renvoie
+# une liste contenant successivement 3 éléments:
+# data[0] <=> la nouvelle liste de client
+# data[1] <=> le numéro de téléphone du nouveau client
+# data[2] <=> le nom de l'opérateur
 data = SaisieDeClient(clients)
 clients = data[0]
+# Ajouter le nouveau nouveau numéro à la liste de numéro de l'opérateur concerné
 CustomAppend(operators[data[2]],data[1])
-CustomAppend(TabOp,data[2])
-for k in TabOp:
-    if k in ["EXPRESSO","PROMOBILE","ORANGE"]:
-        ShowOperator("\t\t {}:".format(k),operators[k])
-    else:
-        ShowOperator("\t\t {}:\t".format(k),operators[k])
+# Actualiser la liste d'opérateur à afficher
+if not data[2] in TabOp:
+    CustomAppend(TabOp,data[2])
+#Actualiser l'affichage
+ListOperator(TabOp,operators)
+Menu(operators,clients)
 
 
     

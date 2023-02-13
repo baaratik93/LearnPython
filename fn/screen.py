@@ -1,13 +1,31 @@
-from fn.control import CustomSplit,IsCorrect,IsExistClient,CustomAppend
-
+from fn.control import CustomSplit,IsCorrect,IsExistClient,CustomAppend,CustomLength
+# operators ={
+#             "ORANGE":["776280898","782324455"],
+#             "EXPRESSO":["706280898","709997865","709909988"],
+#             "PROMOBILE":["756280898","754569988"],
+#             "FREE":["766458877","769806657"]
+#             }
+from os import system
 def ShowOperator(name,o):
     tmp = len(o) * "\t| {:5}"
     print("\t\t",len(o[0])*len(o)*(2)*'-'+'------')
     print(name,tmp.format(*o))
-
+    
+def ListOperator(TabOp,operators):
+    for k in TabOp:
+        if k in ["EXPRESSO","PROMOBILE","ORANGE"]:
+            ShowOperator("\t\t {}:".format(k),operators[k])
+        else:
+            ShowOperator("\t\t {}:\t".format(k),operators[k])
 
 def OperatorConstructTable():
-    return CustomSplit(input("Entrer une liste d'opérateurs séparés par un tiret(-): "),"-")
+    list = CustomSplit(input("Entrer une liste d'opérateurs séparés par un tiret(-): "),"-")
+    for k in list:
+        if k not in ["EXPRESSO","PROMOBILE","ORANGE","FREE"]:
+            system("clear")
+            print("L'opérateur {} n'existe pas".format(k))
+            OperatorConstructTable()
+    return list
     
 
 def AddStudent():
@@ -41,3 +59,27 @@ def WhatOperator(num):
         return "EXPRESSO"
     else:
         return False
+    
+def Menu(operateurs,clients):
+    MenuGenerate(["CLIENTS PAR OPERATEUR","CLIENTS D'UN OPERATEUR","NUMEROS D'UN CLIENT","QUITTER\t\t"])
+    choix = input("\t\t\tEntrer votre choix: ")
+    if choix == "1":
+        for i in operateurs:
+            print("{:15}|{:15}|{:15}|{:15}|".format(i))
+    elif choix == "2":
+        ""
+    elif choix == "3":
+        ""
+    elif choix == "4":
+        exit
+    else:
+        system("clear")
+        print("\t\t\tChoix incorrect, Faites un bonchoix!!!")
+        Menu()
+def MenuGenerate(list):
+    for i in range(CustomLength(list)):
+        print("\t\t\t+---------------------------------------+")
+        print('\t\t\t|\t{} -\t{}\t|'.format(i+1,list[i]))
+        if i == CustomLength(list)-1:
+            print("\t\t\t+---------------------------------------+")
+            
