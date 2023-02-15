@@ -1,5 +1,6 @@
 # On considère le clavier
 clavier = {2:["A","B","C"],3:["D","E","F"],4:["G","H","I"],5:["J","K","L"],6:["M","N","O"],7:["P","Q","R","S"],8:["T","U","V"],9:["W","X","Y","Z"]}
+# clavier2 = [["A","B","C"],["D","E","F"]]
 keybord = {2:["a","b","c"],3:["d","e","f"],4:["g","h","i"],5:["j","k","l"],6:["m","n","o"],7:["p","q","r","s"],8:["t","u","v"],9:["w","x","y","z"]}
 chiffres = ["A","B","C","D","E","F","G","H","I","J"]
 numbers = ["a","b","c","d","e","f","g","h","i","j"]
@@ -38,5 +39,5 @@ def CoderPhrase(phrase):
     return coded
 # - J’ai 17,5 en algo ⇔ 5’244400bh,f0033660025554666
 text ="J’ai 17,5 en algo"
-# print(CoderPhrase(text))
-print(CoderPhrase(input("Entrer une phrase: ")))
+print(CoderPhrase(text))
+# print(CoderPhrase(input("Entrer une phrase: ")))
